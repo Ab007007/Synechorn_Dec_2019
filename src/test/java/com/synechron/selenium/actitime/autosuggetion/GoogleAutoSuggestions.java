@@ -29,6 +29,10 @@ public class GoogleAutoSuggestions {
 	
 		System.out.println(suggestions.size());
 	
+		for (WebElement suggestion : suggestions)
+		{
+			System.out.println("====> " + suggestion.getText() + " <=====");
+		}
 	
 		driver.close();
 	

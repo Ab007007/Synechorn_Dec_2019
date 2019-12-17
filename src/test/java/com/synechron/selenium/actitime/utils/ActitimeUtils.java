@@ -1,6 +1,6 @@
 package com.synechron.selenium.actitime.utils;
 
-public class ApplicationUtils extends DriverUtils
+public class ActitimeUtils extends DriverUtils
 {
 	
 	public static void launchApplication(String url)

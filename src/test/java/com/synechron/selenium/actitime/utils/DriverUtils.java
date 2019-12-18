@@ -141,7 +141,7 @@ public class DriverUtils {
 	 *                     element
 	 */
 	public static void typeOnElement(String locator, String locatorValue, String textToType) {
-		System.out.println("Typing " + textToType + "on element ...");
+		System.out.println("Typing --" + textToType + " -- on element ...");
 		getMyElement(locator, locatorValue).sendKeys(textToType);
 		System.out.println("Type on element is successfull...");
 	}

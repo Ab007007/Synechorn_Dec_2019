@@ -1,0 +1,5 @@
+WinActivate("Open")
+Sleep(2000)
+ControlSend("Open","","Edit1","D:\Synechron_16_Dec_2019\Eclipse_WS\actitime\toastmsg.png")
+Sleep(2000)
+ControlClick("Open","&Open","Button1")

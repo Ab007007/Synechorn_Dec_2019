@@ -1,0 +1,6 @@
+customername,customerdesc
+Syn-Dec-Cust-4,Syn-Dec-CustDesc-4
+Syn-Dec-Cust-5,Syn-Dec-CustDesc-5
+Syn-Dec-Cust-6,Syn-Dec-CustDesc-6
+Syn-Dec-Cust-7,Syn-Dec-CustDesc-7
+Syn-Dec-Cust-8,Syn-Dec-CustDesc-8

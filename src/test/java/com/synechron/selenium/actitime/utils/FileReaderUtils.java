@@ -14,86 +14,53 @@ public class FileReaderUtils {
 	private static FileInputStream fis = null;
 	private static Properties props = null;
 	private static FileReader fr = null;
-	private static BufferedReader br =null;
-	
+	private static BufferedReader br = null;
+
 	public static void getDataFromTextFile() throws IOException {
 		String line;
 		file = new File("data\\customerdata.txt");
-		
-		fr =  new FileReader(file);
+
+		fr = new FileReader(file);
 		br = new BufferedReader(fr);
-		
-		while((line=br.readLine())!=null)
-		{
+
+		while ((line = br.readLine()) != null) {
 			System.out.println(line);
 		}
-		
+
 		br.close();
 		fr.close();
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	private static Properties getProppertiesObj() throws IOException
-	{
+
+	private static Properties getProppertiesObj() throws IOException {
 		file = new File("data\\config.properties");
 		fis = new FileInputStream(file);
 		props = new Properties();
 		props.load(fis);
-		
+
 		return props;
 	}
-	
-	private static void closeFileObj() throws IOException
-	{
+
+	private static void closeFileObj() throws IOException {
 		fis.close();
-				
+
 	}
+
+	public static String getBrowserTyp() throws IOException {
+
+		getProppertiesObj();
+		String browser = props.getProperty("browser");
+		closeFileObj();
+		return browser;
+
+	}
+
 	public static String getUserName() throws IOException {
-		
+
 		getProppertiesObj();
 		String username = props.getProperty("username");
 		closeFileObj();
 		return username;
-	
+
 	}
 
 	public static String getPassword() throws IOException {

@@ -86,7 +86,7 @@ public class FileReaderUtils {
 
 	public static String getAppUrl() throws IOException {
 		getProppertiesObj();
-		String appurl = props.getProperty("appurl");
+		String appurl = props.getProperty("actitimeUrl");
 		closeFileObj();
 		return appurl;
 	}

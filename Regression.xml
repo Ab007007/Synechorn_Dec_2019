@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Regression">
+  <test thread-count="5" verbose="2" name="TASKS">
+    <classes>
+      <class name="com.synechron.selenium.actitime.testng.OrderOfExecution"/>
+      <class name="com.synechron.selenium.actitime.testng.HelloWorldTestNG"/>
+      <class name="com.synechron.selenium.actitime.testng.OrderOfExecutionUsingPriority"/>
+    </classes>
+  </test> <!-- Default test -->
+  <test thread-count="5" verbose="2" name="AllAnnotations">
+    <classes>
+      <class name="com.synechron.selenium.actitime.testng.AllAnnotations"/>
+    </classes>
+  </test> <!-- Default test -->
+</suite> <!-- Default suite -->

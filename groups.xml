@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="actitime by groups">
+  <test thread-count="5" verbose="2" name="GRP-maruthi">
+    <groups>
+      <run>
+        <exclude name="mahendra"/>
+      </run>
+    </groups>
+    <classes>
+      <class name="com.synechron.selenium.actitime.testng.Cars"/>
+    </classes>
+  </test> <!-- GRP-maruthi -->
+</suite> <!-- actitime by groups -->
+            

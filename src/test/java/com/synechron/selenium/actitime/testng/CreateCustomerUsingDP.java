@@ -3,7 +3,6 @@ package com.synechron.selenium.actitime.testng;
 import java.io.IOException;
 
 import org.openqa.selenium.WebDriver;
-import org.testng.ITestResult;
 import org.testng.Reporter;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
@@ -12,62 +11,39 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.synechron.selenium.actitime.utils.ActitimeUtils;
-import com.synechron.selenium.actitime.utils.DriverUtils;
 import com.synechron.selenium.actitime.utils.FileReaderUtils;
 
-public class CreateCustomerUsingTestNG 
+public class CreateCustomerUsingDP 
 {
 	WebDriver driver = null;
 	@BeforeClass
-	public void setup()
+	public void setup() throws IOException
 	{
 		Reporter.log("Creating Browser object in Before Class Method ");
 		driver = ActitimeUtils.getMyDriver("firefox");
+		Reporter.log("Launching application in Before Method");
+		ActitimeUtils.launchApplication(FileReaderUtils.getAppUrl());
+		Reporter.log("Login to the application in Before Method");
+		ActitimeUtils.login(FileReaderUtils.getUserName(), FileReaderUtils.getPassword());
 	}
 	
 	@AfterClass
 	public void cleanUp()
 	{
+		Reporter.log("Logging out of the Application");
+		ActitimeUtils.logout();
 		driver.close();
 		driver = null;
 	}
 	
-
-	@BeforeMethod
-	public void preSetupToTest() throws IOException
-	{
-		Reporter.log("Launching application in Before Method");
-		ActitimeUtils.launchApplication(FileReaderUtils.getAppUrl());
-		Reporter.log("Login to the application in Before Method");
-		ActitimeUtils.login(FileReaderUtils.getUserName(), FileReaderUtils.getPassword());
-		
-	}
 	
-	@AfterMethod
-	public void postExecutionOfTest(ITestResult result) throws IOException
-	{
-		if(result.getStatus() == ITestResult.FAILURE)
-		{
-			Reporter.log("Logging out of the Application");
-			DriverUtils.getScreenShot();
-		}
-			ActitimeUtils.logout();
-	}
-	
-	@Test
-	public void ValidateDashBoardTest()
-	{
-		Reporter.log(ActitimeUtils.getTextOnElement("xpath", "//div[@class='pagetitle']"));
-	}
-	
-	
-	@Test
-	public void createCustomerTest()
+	@Test(dataProviderClass = TestData.class ,  dataProvider = "createCustomerData")
+	public void createCustomerTest(String cn , String cd)
 	{
 		Reporter.log("Creating customer using TEst<br> ");
 		ActitimeUtils.clickOnModule("TASKS");
 		ActitimeUtils.clickOnNewCustomerButton();
-		ActitimeUtils.createCustomer("TestNG-Syn-Dec-Cust-3", "TestNG-Syn-Dec-CustDesc-2");
+		ActitimeUtils.createCustomer(cn,cd);
 		Reporter.log("Created successfully<br>");
 	}
 	

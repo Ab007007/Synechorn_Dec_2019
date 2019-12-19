@@ -1,9 +1,14 @@
 package com.synechron.selenium.actitime.utils;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -15,6 +20,14 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 public class DriverUtils {
 	public static WebDriver driver = null;
 
+	
+	public static void getScreenShot() throws IOException {
+		TakesScreenshot ss = (TakesScreenshot) driver;
+		File file = ss.getScreenshotAs(OutputType.FILE);
+		FileUtils.copyFile(file, new File("reports\\ss_" + FileReaderUtils.getDataAndTime()+".png"));
+	}
+	
+	
 	/***
 	 * getMyDriver returns ChromeDriver by default
 	 * 

@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Date;
 import java.util.Properties;
 
 public class FileReaderUtils {
@@ -16,6 +17,12 @@ public class FileReaderUtils {
 	private static FileReader fr = null;
 	private static BufferedReader br = null;
 
+	
+	public static String getDataAndTime()
+	{
+		Date d = new Date();
+		return d.toString().replace(" ", "_").replace(":", "_");
+	}
 	public static void getDataFromTextFile() throws IOException {
 		String line;
 		file = new File("data\\customerdata.txt");

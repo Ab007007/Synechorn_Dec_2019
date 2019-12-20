@@ -3,18 +3,27 @@ package com.synechron.selenium.actitime.utils;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.UnexpectedAlertBehaviour;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.opera.OperaDriver;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 import com.relevantcodes.extentreports.LogStatus;
 import com.synechron.selenium.actitime.testng.BaseTest;
@@ -49,6 +58,43 @@ public class DriverUtils extends BaseTest
 
 	}
 	
+	public static WebDriver getMyRemoteDriver(String type, String nodeIP, String portnum) throws MalformedURLException
+	{
+		String nodeUrl  = "http://" + nodeIP + ":" + portnum + "/wd/hub";
+		
+		switch (type) {
+		case "chrome":
+			ChromeOptions options = new ChromeOptions();
+			options.setCapability(CapabilityType.PLATFORM_NAME, Platform.WINDOWS);
+			options.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.ACCEPT);
+			options.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+			options.setCapability(CapabilityType.UNHANDLED_PROMPT_BEHAVIOUR, false); //options.addArguments("disable-infobars");
+			driver = new RemoteWebDriver(new URL(nodeUrl),options);
+			break;
+		case "ff":
+			FirefoxOptions foptions = new FirefoxOptions();
+			foptions.setCapability(CapabilityType.PLATFORM_NAME, Platform.WINDOWS);
+			foptions.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.ACCEPT);
+			foptions.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+			foptions.setCapability(CapabilityType.UNHANDLED_PROMPT_BEHAVIOUR, false); //foptions.addArguments("disable-infobars");
+			break;
+			
+		case "edge":
+			EdgeOptions eoptions = new EdgeOptions();
+			eoptions.setCapability(CapabilityType.PLATFORM_NAME, Platform.WINDOWS);
+			eoptions.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.ACCEPT);
+			eoptions.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+			eoptions.setCapability(CapabilityType.UNHANDLED_PROMPT_BEHAVIOUR, false);
+			break;
+		default:
+			System.out.println("Please contact framework developers for more info");
+			break;
+		}
+		
+		
+		
+		return driver;
+	}
 	public static WebDriver getMyDriver(String type)
 	{
 		test.log(LogStatus.INFO,"Creating browser object for " + type);

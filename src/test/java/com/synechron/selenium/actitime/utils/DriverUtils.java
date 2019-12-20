@@ -49,7 +49,7 @@ public class DriverUtils extends BaseTest
 	 * @author Aravind
 	 */
 	public static WebDriver getMyDrvier() {
-		test.log(LogStatus.INFO,"Welcome to Selenium WebDriver");
+		System.out.println("Welcome to Selenium WebDriver");
 		System.setProperty("webdriver.chrome.driver", "drivers\\chromedriver.exe");
 		driver = new ChromeDriver();
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
@@ -97,7 +97,7 @@ public class DriverUtils extends BaseTest
 	}
 	public static WebDriver getMyDriver(String type)
 	{
-		test.log(LogStatus.INFO,"Creating browser object for " + type);
+		System.out.println("Creating browser object for " + type);
 		
 		switch (type) {
 		case "chrome":
@@ -114,7 +114,7 @@ public class DriverUtils extends BaseTest
 			break;
 
 		default:
-			test.log(LogStatus.INFO,"Please contact framework development team for new browser support....");
+			System.out.println("Please contact framework development team for new browser support....");
 			break;
 		}
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
@@ -132,7 +132,7 @@ public class DriverUtils extends BaseTest
 	 * @return returns WebElement
 	 */
 	public static WebElement getMyElement(String locator, String locatorValue) {
-		test.log(LogStatus.INFO,"*****Finding the element by using " + locator + " and " + locatorValue + "*****");
+		System.out.println("*****Finding the element by using " + locator + " and " + locatorValue + "*****");
 		WebElement ele = null;
 		switch (locator) {
 		case "id":
@@ -161,11 +161,11 @@ public class DriverUtils extends BaseTest
 			break;
 		default:
 			ele = null;
-			test.log(LogStatus.INFO,"Check the locator..!!!!!!!");
+			System.out.println("Check the locator..!!!!!!!");
 			break;
 		}
 		displayProperties(ele);
-		test.log(LogStatus.INFO,"**** Element found successfully ***");
+		System.out.println("**** Element found successfully ***");
 		return ele;
 	}
 
@@ -177,7 +177,7 @@ public class DriverUtils extends BaseTest
 	 * @return returns WebElements - List<WebElement>
 	 */
 	public static List<WebElement> getMyElements(String locator, String locatorValue) {
-		test.log(LogStatus.INFO,"*****Finding the element by using " + locator + " and " + locatorValue + "*****");
+		System.out.println("*****Finding the element by using " + locator + " and " + locatorValue + "*****");
 		List<WebElement> ele = null;
 		switch (locator) {
 		case "id":
@@ -206,10 +206,10 @@ public class DriverUtils extends BaseTest
 			break;
 		default:
 			ele = null;
-			test.log(LogStatus.INFO,"Check the locator..!!!!!!!");
+			System.out.println("Check the locator..!!!!!!!");
 			break;
 		}
-		test.log(LogStatus.INFO,"**** Elements found successfully ***");
+		System.out.println("**** Elements found successfully ***");
 		return ele;
 	}
 
@@ -223,9 +223,9 @@ public class DriverUtils extends BaseTest
 	 *                     element
 	 */
 	public static void clickOnElement(String locator, String locatorValue) {
-		test.log(LogStatus.INFO,"Clicking on element....");
+		System.out.println("Clicking on element....");
 		getMyElement(locator, locatorValue).click();
-		test.log(LogStatus.INFO,"Clicking on element successfull...");
+		System.out.println("Clicking on element successfull...");
 	}
 
 	/**
@@ -238,9 +238,9 @@ public class DriverUtils extends BaseTest
 	 *                     element
 	 */
 	public static void typeOnElement(String locator, String locatorValue, String textToType) {
-		test.log(LogStatus.INFO,"Typing --" + textToType + " -- on element ...");
+		System.out.println("Typing --" + textToType + " -- on element ...");
 		getMyElement(locator, locatorValue).sendKeys(textToType);
-		test.log(LogStatus.INFO,"Type on element is successfull...");
+		System.out.println("Type on element is successfull...");
 	}
 
 	/**
@@ -251,9 +251,9 @@ public class DriverUtils extends BaseTest
 	 * @return - String function used to get the text on the given element
 	 */
 	public static String getTextOnElement(String locator, String locatorValue) {
-		test.log(LogStatus.INFO,"Getting text on Elment ");
+		System.out.println("Getting text on Elment ");
 		String text = getMyElement(locator, locatorValue).getText();
-		test.log(LogStatus.INFO,"$$$$ Got " + text + " on the element $$$$");
+		System.out.println("$$$$ Got " + text + " on the element $$$$");
 		return text;
 	}
 
@@ -265,9 +265,9 @@ public class DriverUtils extends BaseTest
 	 * @return - String function used to get the attribute value at runtime on the given element
 	 */
 	public static String getAttributeOnElement(String locator, String locatorValue, String attributeName) {
-		test.log(LogStatus.INFO,"Getting text on Elment ");
+		System.out.println("Getting text on Elment ");
 		String text = getMyElement(locator, locatorValue).getAttribute(attributeName);
-		test.log(LogStatus.INFO,"$$$$ Attribute Value  " + text + " found from the element $$$$");
+		System.out.println("$$$$ Attribute Value  " + text + " found from the element $$$$");
 		return text;
 	}
 
@@ -278,9 +278,19 @@ public class DriverUtils extends BaseTest
 	 * function used to get the text  on the given element
 	 */
 	public static void displayProperties(WebElement ele) {
-		test.log(LogStatus.INFO,"Element Displayed Status : " + ele.isDisplayed());
-		test.log(LogStatus.INFO,"Element Enabled Status : " + ele.isEnabled());
-		test.log(LogStatus.INFO,"Element Selected Status : " + ele.isSelected());
+		System.out.println("Element Displayed Status : " + ele.isDisplayed());
+		System.out.println("Element Enabled Status : " + ele.isEnabled());
+		System.out.println("Element Selected Status : " + ele.isSelected());
 
+	}
+	
+	public static void staticWait(int ms) {
+		System.out.println("STATIC WAIT FOR " + ms);
+		try {
+			Thread.sleep(ms);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

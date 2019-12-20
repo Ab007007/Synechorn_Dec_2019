@@ -1,7 +1,7 @@
 package com.synechron.selenium.actitime.utils;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -63,6 +63,28 @@ public class ActitimeUtils extends DriverUtils
 	public static void logout()
 	{
 		ActitimeUtils.clickOnElement("id", "logoutLink");
+	}
+	
+	
+	public static void searchCustomerToDelete(String customerName) {
+		typeOnElement("xpath", "//div[@class='customersProjectsPanel']//input[@placeholder='Start typing name ...']", customerName);
+		staticWait(2000);
+		Actions act = new Actions(driver);
+		act.moveToElement(getMyElement("xpath", "//div[@class='itemsContainer']//div[@class='title' and contains(text(),'" + customerName + "')]")).perform();
+		act.click(getMyElement("xpath", "//div[@class='itemsContainer']//div[@class='title' and contains(text(),'" + customerName + "')]/following-sibling::div"))
+		.perform();
+		staticWait(2000);
+	}
+	
+	public static void deleteCustomer() {
+		clickOnElement("xpath", "//div[@class='customerNamePlaceHolder']/following-sibling::div");
+		clickOnElement("xpath", "//div[div[@class='customerNamePlaceHolder']]/following-sibling::div[@class='dropdownContainer actionsMenu']//div[text()='Delete']");
+		clickOnElement("id", "customerPanel_deleteConfirm_submitTitle");
+		WebDriverWait wait  = new WebDriverWait(driver, 10);
+		WebElement ele = wait.until(ExpectedConditions.visibilityOf(getMyElement("xpath", "//div[@class='toast']")));
+		System.out.println("Success Message " + ele.getText());
+		wait.until(ExpectedConditions.invisibilityOf(getMyElement("xpath", "//div[@class='toast']")));
+		//getMyElement("xpath", "//div[@class='customersProjectsPanel']//input[@placeholder='Start typing name ...']").clear();
 	}
 	
 }

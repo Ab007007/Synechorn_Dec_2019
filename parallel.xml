@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Parallel Test" parallel="tests">
+  <test thread-count="5" verbose="2" name="Test1">
+    <classes>
+      <class name="com.synechron.selenium.actitime.js.HackingInput"/>
+      <class name="com.synechron.selenium.actitime.js.ScrollDownTillElement"/>
+    </classes>
+  </test> <!-- Default test -->
+   <test thread-count="5" verbose="2" name="Test2">
+    <classes>
+      <class name="com.synechron.selenium.actitime.testng.ValidationTet"/>
+    </classes>
+  </test> <!-- Default test -->
+  
+</suite> <!-- Default suite -->

@@ -10,21 +10,26 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
 import com.synechron.selenium.actitime.utils.ActitimeUtils;
 import com.synechron.selenium.actitime.utils.FileReaderUtils;
 
-public class CreateCustomerUsingDP 
+public class CreateCustomerUsingDP extends BaseTest
 {
 	WebDriver driver = null;
 	@BeforeClass
 	public void setup() throws IOException
 	{
-		Reporter.log("Creating Browser object in Before Class Method ");
+		test = reports.startTest("Setup - BeforeClass Function");
+		test.log(LogStatus.INFO	, "Creating Browser object in Before Class Method ");
 		driver = ActitimeUtils.getMyDriver("firefox");
-		Reporter.log("Launching application in Before Method");
+		test.log(LogStatus.INFO	, "Launching application in Before Method");
 		ActitimeUtils.launchApplication(FileReaderUtils.getAppUrl());
-		Reporter.log("Login to the application in Before Method");
+		test.log(LogStatus.INFO	, "Login to the application in Before Method");
 		ActitimeUtils.login(FileReaderUtils.getUserName(), FileReaderUtils.getPassword());
+		test.log(LogStatus.PASS, "Logged in successfully");
+		
+		reports.endTest(test);
 	}
 	
 	@AfterClass
@@ -40,10 +45,14 @@ public class CreateCustomerUsingDP
 	@Test(dataProviderClass = TestData.class ,  dataProvider = "createCustomerData")
 	public void createCustomerTest(String cn , String cd)
 	{
+		test = reports.startTest("Create Customer using " + cn  +  " and " + cd );
+		test.log(LogStatus.INFO, "Creating customer ");
 		Reporter.log("Creating customer using TEst<br> ");
 		ActitimeUtils.clickOnModule("TASKS");
 		ActitimeUtils.clickOnNewCustomerButton();
 		ActitimeUtils.createCustomer(cn,cd);
+		test.log(LogStatus.PASS, "Customer created successfully");
+		
 		Reporter.log("Created successfully<br>");
 	}
 	
